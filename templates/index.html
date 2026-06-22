@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AirGuard AI — Urban Air Quality Intelligence</title>
+  <link href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="scanline"></div>
+
+  <!-- Top command bar -->
+  <header id="topbar">
+    <div class="brand">
+      <svg class="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
+        <circle cx="20" cy="20" r="6" class="bm-core"/>
+        <circle cx="20" cy="20" r="12" class="bm-ring"/>
+        <circle cx="20" cy="20" r="18" class="bm-ring bm-ring2"/>
+      </svg>
+      <div class="brand-text">
+        <div class="brand-name">AirGuard<span>AI</span></div>
+        <div class="brand-sub">Urban Air Quality Intelligence</div>
+      </div>
+    </div>
+
+    <div class="kpis">
+      <div class="kpi">
+        <label>WORST CITY</label>
+        <b id="worstCity">—</b>
+      </div>
+      <div class="kpi">
+        <label>NATIONAL AVG AQI</label>
+        <b id="natAvg" class="mono">—</b>
+      </div>
+      <div class="kpi">
+        <label>FIRE HOTSPOTS</label>
+        <b id="fireCount" class="mono">—</b>
+      </div>
+      <div class="kpi live-kpi">
+        <span class="live-dot"></span><b>LIVE</b>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="valBtn" class="btn ghost" title="Validate Delhi attribution vs a published study">Validation</button>
+      <button id="gridBtn" class="btn ghost" title="Hyperlocal 1 km grid for Delhi">Delhi 1 km Grid</button>
+      <button id="briefBtn" class="btn">National Brief</button>
+    </div>
+  </header>
+
+  <!-- Map hero -->
+  <div id="map"></div>
+  <div class="map-vignette"></div>
+
+  <!-- Data-source provenance -->
+  <div id="sources" class="sources"></div>
+
+  <!-- Legend -->
+  <div id="legend" class="legend">
+    <div class="legend-title">AIR QUALITY INDEX</div>
+    <div class="legend-scale">
+      <span style="--c:#00b894">Good</span>
+      <span style="--c:#a3c853">Satisf.</span>
+      <span style="--c:#f4d03f">Moderate</span>
+      <span style="--c:#f39c12">Poor</span>
+      <span style="--c:#e74c3c">V.Poor</span>
+      <span style="--c:#7e0023">Severe</span>
+    </div>
+  </div>
+
+  <!-- City intelligence panel -->
+  <aside id="panel" class="panel hidden">
+    <button id="panelClose" class="panel-close" aria-label="Close">×</button>
+    <div class="panel-head">
+      <div class="panel-gauge"><svg id="gauge" viewBox="0 0 120 120"></svg></div>
+      <div class="panel-title">
+        <div class="panel-eyebrow">CITY INTELLIGENCE</div>
+        <h2 id="pCity">—</h2>
+        <div id="pSub" class="panel-sub">—</div>
+      </div>
+    </div>
+    <nav class="tabs">
+      <button class="tab active" data-tab="analysis">Analysis</button>
+      <button class="tab" data-tab="forecast">Forecast</button>
+      <button class="tab" data-tab="enforcement">Enforce</button>
+      <button class="tab" data-tab="citizen">Citizen</button>
+    </nav>
+    <div class="panes">
+      <section class="pane active" data-pane="analysis">
+        <div class="meta-row" id="windRow"></div>
+        <h3>SOURCE ATTRIBUTION <span class="hint" id="attrConf"></span></h3>
+        <div id="bars" class="bars"></div>
+        <p id="explain" class="explain"></p>
+        <button id="trajBtn" class="btn ghost wide">Show wind back-trajectory</button>
+        <div id="attrProvenance" class="provenance"></div>
+      </section>
+      <section class="pane" data-pane="forecast">
+        <div id="skillStat" class="skill"></div>
+        <canvas id="fcChart" height="170"></canvas>
+        <div id="fcWarn" class="warn"></div>
+      </section>
+      <section class="pane" data-pane="enforcement">
+        <p id="enfSummary" class="enf-summary"></p>
+        <ol id="enfList" class="enf-list"></ol>
+        <div id="enfProvenance" class="provenance"></div>
+      </section>
+      <section class="pane" data-pane="citizen">
+        <div class="lang-row" id="langRow"></div>
+        <div id="alertBox" class="alert-box"></div>
+        <button id="copyAlert" class="btn ghost wide">Copy WhatsApp message</button>
+        <div id="citProvenance" class="provenance"></div>
+      </section>
+    </div>
+  </aside>
+
+  <!-- National brief modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-card">
+      <button id="modalClose" class="panel-close" aria-label="Close">×</button>
+      <div class="modal-eyebrow">CPCB MORNING BRIEF</div>
+      <h2>National Air Quality Brief</h2>
+      <div id="briefMeta" class="brief-meta"></div>
+      <p id="briefText" class="brief-text"></p>
+      <div id="briefTop" class="brief-top"></div>
+      <div id="briefProvenance" class="provenance"></div>
+    </div>
+  </div>
+
+  <!-- Validation modal -->
+  <div id="valModal" class="modal hidden">
+    <div class="modal-card">
+      <button id="valClose" class="panel-close" aria-label="Close">×</button>
+      <div class="modal-eyebrow">GROUND-TRUTH VALIDATION</div>
+      <h2>Attribution vs Published Study — Delhi</h2>
+      <div id="valHead" class="brief-meta"></div>
+      <div id="valBars" class="valbars"></div>
+      <div id="valNote" class="provenance"></div>
+    </div>
+  </div>
+
+  <div id="loading" class="loading">
+    <div class="loading-inner">
+      <svg class="loading-mark" viewBox="0 0 40 40"><circle cx="20" cy="20" r="6"/><circle cx="20" cy="20" r="13"/></svg>
+      <span>Initialising air-quality command centre</span>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>

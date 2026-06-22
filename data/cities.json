@@ -1,0 +1,22 @@
+[
+  {"id": "delhi", "name": "Delhi", "lat": 28.6139, "lon": 77.2090, "region": "north_plains", "population_m": 32.9, "flagship": true},
+  {"id": "ghaziabad", "name": "Ghaziabad", "lat": 28.6692, "lon": 77.4538, "region": "north_plains", "population_m": 2.4},
+  {"id": "noida", "name": "Noida", "lat": 28.5355, "lon": 77.3910, "region": "north_plains", "population_m": 1.6},
+  {"id": "gurugram", "name": "Gurugram", "lat": 28.4595, "lon": 77.0266, "region": "north_plains", "population_m": 1.5},
+  {"id": "lucknow", "name": "Lucknow", "lat": 26.8467, "lon": 80.9462, "region": "north_plains", "population_m": 3.7},
+  {"id": "kanpur", "name": "Kanpur", "lat": 26.4499, "lon": 80.3319, "region": "north_plains", "population_m": 3.1},
+  {"id": "varanasi", "name": "Varanasi", "lat": 25.3176, "lon": 82.9739, "region": "north_plains", "population_m": 1.4},
+  {"id": "patna", "name": "Patna", "lat": 25.5941, "lon": 85.1376, "region": "north_plains", "population_m": 2.3},
+  {"id": "muzaffarpur", "name": "Muzaffarpur", "lat": 26.1209, "lon": 85.3647, "region": "north_plains", "population_m": 0.5},
+  {"id": "amritsar", "name": "Amritsar", "lat": 31.6340, "lon": 74.8723, "region": "punjab", "population_m": 1.3},
+  {"id": "ludhiana", "name": "Ludhiana", "lat": 30.9010, "lon": 75.8573, "region": "punjab", "population_m": 1.8},
+  {"id": "jaipur", "name": "Jaipur", "lat": 26.9124, "lon": 75.7873, "region": "northwest_arid", "population_m": 4.1},
+  {"id": "ahmedabad", "name": "Ahmedabad", "lat": 23.0225, "lon": 72.5714, "region": "west", "population_m": 8.4},
+  {"id": "mumbai", "name": "Mumbai", "lat": 19.0760, "lon": 72.8777, "region": "coastal_west", "population_m": 21.7},
+  {"id": "pune", "name": "Pune", "lat": 18.5204, "lon": 73.8567, "region": "west", "population_m": 7.4},
+  {"id": "nagpur", "name": "Nagpur", "lat": 21.1458, "lon": 79.0882, "region": "central", "population_m": 2.9},
+  {"id": "kolkata", "name": "Kolkata", "lat": 22.5726, "lon": 88.3639, "region": "east", "population_m": 15.1},
+  {"id": "hyderabad", "name": "Hyderabad", "lat": 17.3850, "lon": 78.4867, "region": "south", "population_m": 10.5},
+  {"id": "bengaluru", "name": "Bengaluru", "lat": 12.9716, "lon": 77.5946, "region": "south", "population_m": 13.6},
+  {"id": "chennai", "name": "Chennai", "lat": 13.0827, "lon": 80.2707, "region": "coastal_south", "population_m": 11.5}
+]

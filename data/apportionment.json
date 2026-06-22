@@ -1,0 +1,76 @@
+{
+  "_note": "Seasonal source-apportionment PRIORS by region. These anchor the attribution engine so percentages are grounded in published apportionment literature (e.g. SAFAR Delhi source-apportionment, TERI-ARAI 2018 Delhi study, CPCB studies) rather than invented by the model. Replace the numbers below with exact figures from the specific published study you cite in your deck. Categories sum to 100.",
+  "categories": [
+    {"key": "vehicular", "label": "Vehicular", "color": "#ff6b6b"},
+    {"key": "stubble_biomass", "label": "Stubble / Biomass", "color": "#ffa94d"},
+    {"key": "industrial", "label": "Industrial", "color": "#9775fa"},
+    {"key": "dust", "label": "Road / Construction Dust", "color": "#ffd43b"},
+    {"key": "other", "label": "Other", "color": "#74c0fc"}
+  ],
+  "seasons": {
+    "_months": {"winter": [12, 1, 2], "summer": [3, 4, 5, 6], "monsoon": [7, 8, 9], "post_monsoon": [10, 11]}
+  },
+  "regions": {
+    "north_plains": {
+      "winter":       {"vehicular": 28, "stubble_biomass": 24, "industrial": 18, "dust": 18, "other": 12},
+      "summer":       {"vehicular": 24, "stubble_biomass": 8,  "industrial": 18, "dust": 38, "other": 12},
+      "monsoon":      {"vehicular": 36, "stubble_biomass": 6,  "industrial": 24, "dust": 18, "other": 16},
+      "post_monsoon": {"vehicular": 22, "stubble_biomass": 38, "industrial": 14, "dust": 16, "other": 10}
+    },
+    "punjab": {
+      "winter":       {"vehicular": 22, "stubble_biomass": 30, "industrial": 16, "dust": 20, "other": 12},
+      "summer":       {"vehicular": 22, "stubble_biomass": 12, "industrial": 16, "dust": 38, "other": 12},
+      "monsoon":      {"vehicular": 34, "stubble_biomass": 8,  "industrial": 22, "dust": 20, "other": 16},
+      "post_monsoon": {"vehicular": 14, "stubble_biomass": 52, "industrial": 12, "dust": 14, "other": 8}
+    },
+    "northwest_arid": {
+      "winter":       {"vehicular": 30, "stubble_biomass": 14, "industrial": 18, "dust": 26, "other": 12},
+      "summer":       {"vehicular": 20, "stubble_biomass": 6,  "industrial": 16, "dust": 46, "other": 12},
+      "monsoon":      {"vehicular": 36, "stubble_biomass": 6,  "industrial": 20, "dust": 22, "other": 16},
+      "post_monsoon": {"vehicular": 26, "stubble_biomass": 20, "industrial": 16, "dust": 28, "other": 10}
+    },
+    "west": {
+      "winter":       {"vehicular": 32, "stubble_biomass": 14, "industrial": 26, "dust": 18, "other": 10},
+      "summer":       {"vehicular": 28, "stubble_biomass": 8,  "industrial": 26, "dust": 28, "other": 10},
+      "monsoon":      {"vehicular": 38, "stubble_biomass": 6,  "industrial": 30, "dust": 12, "other": 14},
+      "post_monsoon": {"vehicular": 32, "stubble_biomass": 16, "industrial": 26, "dust": 16, "other": 10}
+    },
+    "coastal_west": {
+      "winter":       {"vehicular": 36, "stubble_biomass": 10, "industrial": 30, "dust": 14, "other": 10},
+      "summer":       {"vehicular": 34, "stubble_biomass": 6,  "industrial": 30, "dust": 18, "other": 12},
+      "monsoon":      {"vehicular": 40, "stubble_biomass": 4,  "industrial": 32, "dust": 8,  "other": 16},
+      "post_monsoon": {"vehicular": 36, "stubble_biomass": 12, "industrial": 30, "dust": 12, "other": 10}
+    },
+    "central": {
+      "winter":       {"vehicular": 30, "stubble_biomass": 18, "industrial": 24, "dust": 18, "other": 10},
+      "summer":       {"vehicular": 28, "stubble_biomass": 10, "industrial": 24, "dust": 28, "other": 10},
+      "monsoon":      {"vehicular": 38, "stubble_biomass": 6,  "industrial": 28, "dust": 12, "other": 16},
+      "post_monsoon": {"vehicular": 30, "stubble_biomass": 20, "industrial": 22, "dust": 18, "other": 10}
+    },
+    "east": {
+      "winter":       {"vehicular": 32, "stubble_biomass": 18, "industrial": 28, "dust": 12, "other": 10},
+      "summer":       {"vehicular": 30, "stubble_biomass": 10, "industrial": 30, "dust": 18, "other": 12},
+      "monsoon":      {"vehicular": 38, "stubble_biomass": 6,  "industrial": 32, "dust": 8,  "other": 16},
+      "post_monsoon": {"vehicular": 32, "stubble_biomass": 18, "industrial": 28, "dust": 12, "other": 10}
+    },
+    "south": {
+      "winter":       {"vehicular": 44, "stubble_biomass": 8,  "industrial": 22, "dust": 18, "other": 8},
+      "summer":       {"vehicular": 42, "stubble_biomass": 6,  "industrial": 22, "dust": 22, "other": 8},
+      "monsoon":      {"vehicular": 46, "stubble_biomass": 4,  "industrial": 24, "dust": 12, "other": 14},
+      "post_monsoon": {"vehicular": 44, "stubble_biomass": 8,  "industrial": 22, "dust": 18, "other": 8}
+    },
+    "coastal_south": {
+      "winter":       {"vehicular": 42, "stubble_biomass": 6,  "industrial": 26, "dust": 16, "other": 10},
+      "summer":       {"vehicular": 40, "stubble_biomass": 4,  "industrial": 26, "dust": 20, "other": 10},
+      "monsoon":      {"vehicular": 44, "stubble_biomass": 4,  "industrial": 28, "dust": 8,  "other": 16},
+      "post_monsoon": {"vehicular": 42, "stubble_biomass": 6,  "industrial": 26, "dust": 16, "other": 10}
+    }
+  },
+  "validation_reference": {
+    "city": "Delhi",
+    "season": "winter",
+    "source": "Published Delhi winter source-apportionment (SAFAR / TERI-ARAI range, illustrative)",
+    "split": {"vehicular": 28, "stubble_biomass": 26, "industrial": 18, "dust": 16, "other": 12},
+    "disclaimer": "Replace with the exact figures + citation from the specific study used in your submission."
+  }
+}
