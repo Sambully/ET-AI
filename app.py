@@ -12,7 +12,7 @@ from flask import Flask, jsonify, render_template, request
 
 import config
 from services import (advisories, aqi_data, attribution, fires, forecast,
-                      grid, weather)
+                      grap, grid, health, inventory, stubble_prediction, weather)
 
 app = Flask(__name__)
 
@@ -167,6 +167,69 @@ def api_validation():
                 "reference": ref["split"], "deviation": dev, "mean_abs_dev": mad,
                 "source": ref["source"], "categories": cats}
     return jsonify(cached("validation", build))
+
+
+@app.route("/api/city/<city_id>/health")
+def api_health_impact(city_id):
+    city = config.get_city(city_id)
+    if not city:
+        return jsonify({"error": "unknown city"}), 404
+    aqi_info = _aqi_for(city_id)
+    return jsonify(cached(f"health:{city_id}",
+                          lambda: health.assess(city, aqi_info)))
+
+
+@app.route("/api/city/<city_id>/grap")
+def api_grap(city_id):
+    city = config.get_city(city_id)
+    if not city:
+        return jsonify({"error": "unknown city"}), 404
+    aqi_info = _aqi_for(city_id)
+    attr = _attribution(city)
+    return jsonify(cached(f"grap:{city_id}",
+                          lambda: grap.get_grap_status(city, aqi_info, attr)))
+
+
+@app.route("/api/grap/national")
+def api_grap_national():
+    def build():
+        all_aqi = _all_aqi()
+        results = []
+        for c in all_aqi:
+            stage_num = grap.detect_stage(c["aqi"])
+            if stage_num > 0:
+                stage = grap.STAGES[stage_num]
+                results.append({
+                    "id": c["id"], "name": c["name"],
+                    "aqi": c["aqi"], "color": c.get("color", stage["color"]),
+                    "lat": c["lat"], "lon": c["lon"],
+                    "stage": stage_num, "stage_name": stage["name"],
+                    "label": stage["label"], "stage_color": stage["color"],
+                })
+        results.sort(key=lambda x: x["aqi"], reverse=True)
+        return {"triggered": results, "count": len(results),
+                "total_cities": len(all_aqi)}
+    return jsonify(cached("grap:national", build))
+
+
+@app.route("/api/inventory")
+def api_inventory_national():
+    return jsonify(inventory.get_national_summary())
+
+
+@app.route("/api/inventory/<city_id>")
+def api_inventory_city(city_id):
+    city = config.get_city(city_id)
+    if not city:
+        return jsonify({"error": "unknown city"}), 404
+    return jsonify(inventory.get_stats(city_id))
+
+
+@app.route("/api/stubble/predictions")
+def api_stubble_predictions():
+    fires_list = _fires()["fires"]
+    return jsonify(cached("stubble:predictions",
+                          lambda: stubble_prediction.predict_burn_events(fires_list)))
 
 
 @app.route("/api/health")

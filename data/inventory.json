@@ -1,0 +1,275 @@
+{
+  "delhi": {
+    "events": [
+      {
+        "ts": "2026-06-24T11:37:11",
+        "season": "summer",
+        "split": {
+          "vehicular": 27,
+          "stubble_biomass": 8,
+          "industrial": 16,
+          "dust": 38,
+          "other": 11
+        },
+        "aqi": 220,
+        "upwind_fires": 1,
+        "wind_speed": 5.9,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:37:14",
+        "season": "summer",
+        "split": {
+          "vehicular": 27,
+          "stubble_biomass": 8,
+          "industrial": 16,
+          "dust": 38,
+          "other": 11
+        },
+        "aqi": 220,
+        "upwind_fires": 1,
+        "wind_speed": 5.9,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:40:34",
+        "season": "summer",
+        "split": {
+          "vehicular": 27,
+          "stubble_biomass": 8,
+          "industrial": 16,
+          "dust": 38,
+          "other": 11
+        },
+        "aqi": 220,
+        "upwind_fires": 1,
+        "wind_speed": 5.9,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:40:43",
+        "season": "summer",
+        "split": {
+          "vehicular": 27,
+          "stubble_biomass": 8,
+          "industrial": 16,
+          "dust": 38,
+          "other": 11
+        },
+        "aqi": 220,
+        "upwind_fires": 1,
+        "wind_speed": 5.9,
+        "llm_used": false
+      }
+    ],
+    "learned_priors": {
+      "summer": {
+        "vehicular": 27.0,
+        "stubble_biomass": 8.0,
+        "industrial": 16.0,
+        "dust": 38.0,
+        "other": 11.0
+      }
+    },
+    "rmse_history": [
+      {
+        "ts": "2026-06-24T11:40:34",
+        "season": "summer",
+        "n_events": 3,
+        "rmse_vs_base": 1.67,
+        "rmse_vs_learned": 0.0
+      },
+      {
+        "ts": "2026-06-24T11:40:43",
+        "season": "summer",
+        "n_events": 4,
+        "rmse_vs_base": 1.67,
+        "rmse_vs_learned": 0.0
+      }
+    ],
+    "first_event": "2026-06-24T11:37:11",
+    "last_event": "2026-06-24T11:40:43"
+  },
+  "mumbai": {
+    "events": [
+      {
+        "ts": "2026-06-24T11:37:27",
+        "season": "summer",
+        "split": {
+          "vehicular": 32,
+          "stubble_biomass": 6,
+          "industrial": 28,
+          "dust": 23,
+          "other": 11
+        },
+        "aqi": 111,
+        "upwind_fires": 0,
+        "wind_speed": 4.5,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:37:30",
+        "season": "summer",
+        "split": {
+          "vehicular": 32,
+          "stubble_biomass": 6,
+          "industrial": 28,
+          "dust": 23,
+          "other": 11
+        },
+        "aqi": 111,
+        "upwind_fires": 0,
+        "wind_speed": 4.5,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:40:57",
+        "season": "summer",
+        "split": {
+          "vehicular": 32,
+          "stubble_biomass": 6,
+          "industrial": 28,
+          "dust": 23,
+          "other": 11
+        },
+        "aqi": 111,
+        "upwind_fires": 0,
+        "wind_speed": 4.5,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:40:59",
+        "season": "summer",
+        "split": {
+          "vehicular": 32,
+          "stubble_biomass": 6,
+          "industrial": 28,
+          "dust": 23,
+          "other": 11
+        },
+        "aqi": 111,
+        "upwind_fires": 0,
+        "wind_speed": 4.5,
+        "llm_used": false
+      }
+    ],
+    "learned_priors": {
+      "summer": {
+        "vehicular": 32.0,
+        "stubble_biomass": 6.0,
+        "industrial": 28.0,
+        "dust": 23.0,
+        "other": 11.0
+      }
+    },
+    "rmse_history": [
+      {
+        "ts": "2026-06-24T11:40:57",
+        "season": "summer",
+        "n_events": 3,
+        "rmse_vs_base": 2.61,
+        "rmse_vs_learned": 0.0
+      },
+      {
+        "ts": "2026-06-24T11:40:59",
+        "season": "summer",
+        "n_events": 4,
+        "rmse_vs_base": 2.61,
+        "rmse_vs_learned": 0.0
+      }
+    ],
+    "first_event": "2026-06-24T11:37:27",
+    "last_event": "2026-06-24T11:40:59"
+  },
+  "kolkata": {
+    "events": [
+      {
+        "ts": "2026-06-24T11:37:43",
+        "season": "summer",
+        "split": {
+          "vehicular": 32,
+          "stubble_biomass": 9,
+          "industrial": 27,
+          "dust": 21,
+          "other": 11
+        },
+        "aqi": 132,
+        "upwind_fires": 0,
+        "wind_speed": 6.0,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:37:46",
+        "season": "summer",
+        "split": {
+          "vehicular": 32,
+          "stubble_biomass": 9,
+          "industrial": 27,
+          "dust": 21,
+          "other": 11
+        },
+        "aqi": 132,
+        "upwind_fires": 0,
+        "wind_speed": 6.0,
+        "llm_used": false
+      },
+      {
+        "ts": "2026-06-24T11:41:04",
+        "season": "summer",
+        "split": {
+          "vehicular": 35,
+          "stubble_biomass": 7,
+          "industrial": 29,
+          "dust": 19,
+          "other": 10
+        },
+        "aqi": 132,
+        "upwind_fires": 0,
+        "wind_speed": 6.0,
+        "llm_used": true
+      },
+      {
+        "ts": "2026-06-24T11:41:15",
+        "season": "summer",
+        "split": {
+          "vehicular": 32,
+          "stubble_biomass": 9,
+          "industrial": 27,
+          "dust": 21,
+          "other": 11
+        },
+        "aqi": 132,
+        "upwind_fires": 0,
+        "wind_speed": 6.0,
+        "llm_used": false
+      }
+    ],
+    "learned_priors": {
+      "summer": {
+        "vehicular": 32.8,
+        "stubble_biomass": 8.5,
+        "industrial": 27.5,
+        "dust": 20.5,
+        "other": 10.8
+      }
+    },
+    "rmse_history": [
+      {
+        "ts": "2026-06-24T11:41:04",
+        "season": "summer",
+        "n_events": 3,
+        "rmse_vs_base": 2.21,
+        "rmse_vs_learned": 0.03
+      },
+      {
+        "ts": "2026-06-24T11:41:15",
+        "season": "summer",
+        "n_events": 4,
+        "rmse_vs_base": 2.19,
+        "rmse_vs_learned": 0.03
+      }
+    ],
+    "first_event": "2026-06-24T11:37:43",
+    "last_event": "2026-06-24T11:41:15"
+  }
+}

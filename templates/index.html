@@ -48,6 +48,9 @@
     <div class="actions">
       <button id="valBtn" class="btn ghost" title="Validate Delhi attribution vs a published study">Validation</button>
       <button id="gridBtn" class="btn ghost" title="Hyperlocal 1 km grid for Delhi">Delhi 1 km Grid</button>
+      <button id="grapBtn" class="btn ghost" title="Graded Response Action Plan — national status">GRAP Status</button>
+      <button id="stubbleBtn" class="btn ghost burn-btn" title="48–72 h stubble burn prediction — district collector alerts">🔥 Burn Predict</button>
+      <button id="moatBtn" class="btn ghost moat-btn" title="Proprietary emission inventory — data moat dashboard">📊 Data Moat</button>
       <button id="briefBtn" class="btn">National Brief</button>
     </div>
   </header>
@@ -88,6 +91,9 @@
       <button class="tab" data-tab="forecast">Forecast</button>
       <button class="tab" data-tab="enforcement">Enforce</button>
       <button class="tab" data-tab="citizen">Citizen</button>
+      <button class="tab" data-tab="health">Health</button>
+      <button class="tab" data-tab="grap" id="grapTab">GRAP</button>
+      <button class="tab" data-tab="inventory" id="inventoryTab">Inventory</button>
     </nav>
     <div class="panes">
       <section class="pane active" data-pane="analysis">
@@ -114,6 +120,15 @@
         <button id="copyAlert" class="btn ghost wide">Copy WhatsApp message</button>
         <div id="citProvenance" class="provenance"></div>
       </section>
+      <section class="pane" data-pane="health">
+        <!-- Populated dynamically by loadHealth() -->
+      </section>
+      <section class="pane" data-pane="grap">
+        <!-- Populated dynamically by loadGrap() -->
+      </section>
+      <section class="pane" data-pane="inventory">
+        <!-- Populated dynamically by loadInventory() -->
+      </section>
     </div>
   </aside>
 
@@ -139,6 +154,41 @@
       <div id="valHead" class="brief-meta"></div>
       <div id="valBars" class="valbars"></div>
       <div id="valNote" class="provenance"></div>
+    </div>
+  </div>
+
+  <!-- Data moat national modal -->
+  <div id="moatModal" class="modal hidden">
+    <div class="modal-card modal-card--wide">
+      <button id="moatModalClose" class="panel-close" aria-label="Close">×</button>
+      <div class="modal-eyebrow">PROPRIETARY EMISSION INVENTORY</div>
+      <h2 id="moatModalTitle">Data Moat Dashboard</h2>
+      <div id="moatMetaRow" class="brief-meta"></div>
+      <div id="moatContent"></div>
+      <div id="moatProvenance" class="provenance"></div>
+    </div>
+  </div>
+
+  <!-- Stubble burn prediction modal -->
+  <div id="stubbleModal" class="modal hidden">
+    <div class="modal-card modal-card--wide">
+      <button id="stubbleModalClose" class="panel-close" aria-label="Close">×</button>
+      <div class="modal-eyebrow">STUBBLE BURN PREDICTION ENGINE</div>
+      <h2 id="stubbleModalTitle">48–72 Hour Burn Risk Forecast</h2>
+      <div id="stubbleMetaRow" class="brief-meta"></div>
+      <div id="stubbleContent"></div>
+      <div id="stubbleProvenance" class="provenance"></div>
+    </div>
+  </div>
+
+  <!-- GRAP national status modal -->
+  <div id="grapModal" class="modal hidden">
+    <div class="modal-card">
+      <button id="grapModalClose" class="panel-close" aria-label="Close">×</button>
+      <div class="modal-eyebrow">GRADED RESPONSE ACTION PLAN</div>
+      <h2 id="grapModalTitle">National GRAP Status</h2>
+      <div id="grapNationalContent"></div>
+      <div id="grapNationalProvenance" class="provenance"></div>
     </div>
   </div>
 

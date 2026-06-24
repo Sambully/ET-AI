@@ -31,6 +31,7 @@ AirGuard AI is that layer — fusing monitoring stations, satellite fire data, m
 | 🗺️ | **Live command-centre map** | MapLibre GL vector map of 20 cities, AQI-graded glowing markers, pollution heat cloud, live NASA fire hotspots |
 | 🧠 | **Anchored source attribution** | % split by source (vehicular / stubble / industrial / dust) — *anchored to published seasonal apportionment* and modulated by live wind + upwind satellite fires. The LLM **explains**, it doesn't invent the numbers |
 | 📈 | **72-hour forecast + skill metric** | Open-Meteo forecast with a real **RMSE-vs-persistence** backtest — the accuracy metric the brief asks for |
+| 🚨 | **GRAP trigger automation** | Detects GRAP Stage I–IV threshold crossings and auto-generates a **ready-to-sign government order** — formal prose, statutory citations, source-attribution-targeted restrictions, and an enforcement checklist with *immediate / today / tonight* priorities. Closes the action-protocol gap: from data → signed order in one click |
 | 🚓 | **Enforcement intelligence** | Prioritised inspector-deployment plan derived from the attribution |
 | 🗣️ | **Multilingual citizen alerts** | WhatsApp-ready health advisories in Hindi, English, Tamil, Kannada, Marathi, Telugu |
 | 📋 | **National morning brief** | One-page AI summary of the top-5 polluted cities, CPCB-director style |
@@ -84,11 +85,23 @@ Flask (app.py) ── JSON API + startup cache pre-warm
  ├─ services/fires.py        NASA FIRMS hotspots + seeded stubble belt
  ├─ services/attribution.py  anchored prior → live-signal modulation → LLM explain
  ├─ services/advisories.py   enforcement / citizen alerts / national brief
+ ├─ services/grap.py         GRAP stage detection → LLM order → checklist
  ├─ services/forecast.py     RMSE-vs-persistence backtest
  ├─ services/grid.py         Delhi ~1 km IDW grid
  └─ data/*.json              cities + seasonal apportionment anchors
 Frontend (static/, templates/): MapLibre GL + Chart.js command centre
 ```
+
+## GRAP Stages
+
+| Stage | Threshold | Restrictions invoked |
+|---|---|---|
+| **Stage I** | AQI 201–300 (Poor) | Open burning ban, dust suppression, PUC checks, anti-smog guns |
+| **Stage II** | AQI 301–400 (Very Poor) | + DG-set ban, mechanised sweeping, coal-based dhabas shutdown |
+| **Stage III** | AQI 401–450 (Severe) | + Brick kilns / hot-mix plants closed, BS-III/IV vehicles banned |
+| **Stage IV** | AQI > 450 (Severe+) | + Truck entry ban, school closure, construction halt, WFH mandate |
+
+Each order is LLM-generated with formal statutory language, cites the Air Act 1981 and EPA 1986, and names the dominant pollution source explicitly. Without a key the system falls back to a deterministic template — the order is still complete and printable.
 
 ## A note on the apportionment anchors
 

@@ -12,7 +12,7 @@ computed split stands on its own. Either way the numbers are traceable.
 import math
 
 import config
-from services import llm
+from services import inventory, llm
 
 _CATS = [c["key"] for c in config.APPORTIONMENT["categories"]]
 _CAT_META = {c["key"]: c for c in config.APPORTIONMENT["categories"]}
@@ -86,7 +86,11 @@ def compute_split(city, aqi_info, wind, fires, force_season=None):
     n_upwind = len(upwind)
     aqi = aqi_info["aqi"]
 
-    split = dict(prior)
+    # Use city-learned prior if we have enough historical events for this season
+    learned = inventory.get_adaptive_prior(city["id"], season)
+    split = dict(learned if learned is not None else prior)
+    prior_source = "learned" if learned is not None else "published"
+
     # stubble/biomass boost from upwind fires (stronger when AQI already high)
     if n_upwind:
         boost = min(26, n_upwind * 0.9) * (1.15 if aqi > 200 else 1.0)
@@ -106,6 +110,7 @@ def compute_split(city, aqi_info, wind, fires, force_season=None):
         "nearest_upwind_km": upwind[0]["distance_km"] if upwind else None,
         "aqi": aqi,
         "prior_used": prior,
+        "prior_source": prior_source,
     }
     return split, signals, upwind
 
@@ -193,6 +198,16 @@ def attribute(city, aqi_info, wind, fires):
              "color": _CAT_META[k]["color"], "pct": split[k]} for k in _CATS]
     bars.sort(key=lambda b: b["pct"], reverse=True)
 
+    # Record this event to the inventory (non-blocking; errors are swallowed)
+    try:
+        inventory.record(
+            city_id=city["id"], season=signals["season"], split=split,
+            aqi=aqi_info["aqi"], upwind_fire_count=signals["upwind_fire_count"],
+            wind_speed_kmh=wind.get("speed_kmh", 0), llm_used=llm_used,
+        )
+    except Exception as exc:
+        print(f"[inventory] record error: {exc}")
+
     return {
         "city": city["name"], "city_id": city["id"],
         "split": split, "bars": bars,
@@ -200,5 +215,6 @@ def attribute(city, aqi_info, wind, fires):
         "season": signals["season"], "wind": wind,
         "upwind_fires": upwind[:20], "upwind_fire_count": signals["upwind_fire_count"],
         "anchored_prior": signals["prior_used"],
+        "prior_source": signals.get("prior_source", "published"),
         "llm_used": llm_used, "provider": config.provider_label(),
     }
